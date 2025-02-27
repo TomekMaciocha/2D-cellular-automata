@@ -1,0 +1,29 @@
+[project]
+name = "2D-cellular-automata"
+version = "0.1.0"
+description = ""
+authors = [
+    { name = "TomekMaciocha", email = "tmaciocha95@gmail.com" },
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = ["numpy (>=2.2.3,<3.0.0)", "matplotlib (>=3.10.0,<4.0.0)", "pathlib (>=1.0.1,<2.0.0)"]
+
+[tool.poetry]
+packages = [{ include = "generator", from = "src" }]
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.10.0"
+ruff = "^0.9.2"
+mypy = "^1.14.1"
+pytest = "^8.3.4"
+coverage = "^7.6.10"
+pytest-cov = "^6.0.0"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.mypy]
+strict = true
