@@ -30,7 +30,7 @@ class Simulation:
             self.size = 100
 
         self.gen()
-        self.temp = list(np.zeros((self.size, self.size), dtype="int"))
+        self.temp = np.zeros((self.size, self.size), dtype="int")
         self.settings_out()
 
     def set_p(self) -> None:
@@ -44,9 +44,8 @@ class Simulation:
             break
 
     def gen(self) -> None:
-        self.sim_data = list(self.p * np.ones((self.size, self.size)))
         self.sim_data = (
-            np.random.random(size=(self.size, self.size)) < self.sim_data
+            np.random.random(size=(self.size, self.size)) < self.p
         ).astype(int)
 
     def settings_out(self) -> None:
@@ -135,7 +134,7 @@ class Simulation:
         for i in range(self.size):
             for j in range(self.size):
                 self.temp[i][j] = self.Is_Alive(i, j)
-        self.sim_data = list(self.temp)
+        self.sim_data = np.copy(self.temp)
 
     def write_current(self, filename: str) -> None:
         np.savetxt("output_files/" + filename, np.array(self.sim_data),fmt='%d')
