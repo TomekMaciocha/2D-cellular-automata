@@ -34,19 +34,24 @@ class Simulation:
         self.settings_out()
 
     def set_p(self) -> None:
-        print("Set probability of a cell being alive on the starting iteration:")
+        print(
+            "Set probability of a cell being alive on the starting iteration (default: 0.5):"
+        )
         while True:
-            tmp = float(input())
-            if tmp < 0 or tmp > 1:
+            tmp = input()
+            if tmp == "":
+                self.p = 0.5
+                break
+            elif float(tmp) < 0 or float(tmp) > 1:
                 print("Probability has to be between 0 and 1")
                 continue
             self.p = tmp
             break
 
     def gen(self) -> None:
-        self.sim_data = (
-            np.random.random(size=(self.size, self.size)) < self.p
-        ).astype(int)
+        self.sim_data = (np.random.random(size=(self.size, self.size)) < self.p).astype(
+            int
+        )
 
     def settings_out(self) -> None:
         print("\n rules for dead cells:" + str(self.rules[0]))
@@ -55,10 +60,13 @@ class Simulation:
         print("\n probability p:" + str(self.p) + "\n")
 
     def set_size(self) -> None:
-        print("Set size of the simulation grid (3 to 1000):")
+        print("Set size of the simulation grid (3 to 1000, default: 100):")
         while True:
-            tmp = int(input())
-            if tmp < 3 or tmp > 1000:
+            tmp = input()
+            if tmp == "":
+                self.size = 100
+                break
+            elif int(tmp) < 3 or int(tmp) > 1000:
                 print("Input not in specified range.")
                 continue
             self.size = tmp
@@ -70,7 +78,7 @@ class Simulation:
         tmp = 1
         while True:
             tmp = input()
-            if tmp == '':
+            if tmp == "":
                 break
             elif int(tmp) < 0 or int(tmp) > 8:
                 print("Input not in specified range.")
@@ -80,12 +88,14 @@ class Simulation:
                 continue
             self.rules[0].append(int(tmp))
 
-        print("Input rules for when a cell is alive (0 to 8, none to end this setting):")
+        print(
+            "Input rules for when a cell is alive (0 to 8, none to end this setting):"
+        )
 
         tmp = 1
         while True:
             tmp = input()
-            if tmp == '':
+            if tmp == "":
                 break
             elif int(tmp) < 0 or int(tmp) > 8:
                 print("Input not in specified range.")
@@ -107,23 +117,7 @@ class Simulation:
             + self.sim_data[(rows + 1) % self.size][cols]
             + self.sim_data[(rows + 1) % self.size][(cols + 1) % self.size]
         )
-        # print(
-        #     "["
-        #     + str(rows)
-        #     + ","
-        #     + str(cols)
-        #     + "] inside-"
-        #     + str(self.sim_data[rows][cols])
-        #     + str(type(self.sim_data[rows][cols]))
-        #     + " neighbors-"
-        #     + str(num_neighbors)
-        #     + " check-"
-        #     + str(
-        #         num_neighbors in self.rules[0]
-        #         if self.sim_data[rows][cols] == 0
-        #         else num_neighbors in self.rules[1]
-        #     )
-        # )
+
         if self.sim_data[rows][cols] == 0:
             return num_neighbors in self.rules[0]
         else:
@@ -137,12 +131,10 @@ class Simulation:
         self.sim_data = np.copy(self.temp)
 
     def write_current(self, filename: str) -> None:
-        np.savetxt("output_files/" + filename, np.array(self.sim_data),fmt='%d')
+        np.savetxt("output_files/" + filename, np.array(self.sim_data), fmt="%d")
 
     def simulate(self) -> None:
-        do_write = input(
-            "input an number of steps in the simulation or  nothing for default number of steps (200):\n"
-        )
+        do_write = input("input an number of steps in the simulation (default: 200):\n")
         if do_write == "":
             nsteps = 200
         else:
