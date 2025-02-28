@@ -33,7 +33,8 @@ def main() -> None:
         )
         if not another_sim == "y" and not another_sim == "Y":
             break
-
+    
+    os.system("cls")
     print("Thank you for using my program!")
 
 
