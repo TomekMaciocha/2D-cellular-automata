@@ -3,6 +3,9 @@ import glob
 from simulation import Simulation
 from visualization import Visualization
 
+OUTPUT_FOLDER = "output_files"
+VISUALISATION_FOLDER = "visualizations"
+
 
 def sim_set_size() -> int:
     """This function is used to manually enter the size of the simulated system."""
@@ -138,6 +141,11 @@ def main() -> None:
         "\n \nThis is a simple program for simulating evolution of 2D cellular automata starting from random noise. Please have fun with it!\n \n"
     )
 
+    if not os.path.exists(OUTPUT_FOLDER):
+        os.makedirs(OUTPUT_FOLDER)
+    if not os.path.exists(VISUALISATION_FOLDER):
+        os.makedirs(VISUALISATION_FOLDER)
+
     while True:
         sim_settings = input(
             "Enter 1 for normal settings, 2 for advanced settings, anything else for default settings:"
@@ -149,11 +157,14 @@ def main() -> None:
                 sim_set_probability(),
                 sim_set_rules(),
                 sim_set_n_steps(),
+                OUTPUT_FOLDER,
             )
         elif sim_settings == "1":
-            sim = Simulation(100, 0.5, sim_set_rules(), sim_set_n_steps())
+            sim = Simulation(
+                100, 0.5, sim_set_rules(), sim_set_n_steps(), OUTPUT_FOLDER
+            )
         else:
-            sim = Simulation(100, 0.5, [[3], [3, 2]], 100)
+            sim = Simulation(100, 0.5, [[3], [3, 2]], 100, OUTPUT_FOLDER)
 
         sim.simulate()
 
@@ -168,10 +179,19 @@ def main() -> None:
                     vis_set_fps(),
                     vis_set_n_frames(sim.n_steps),
                     vis_set_animation_name(),
+                    OUTPUT_FOLDER,
+                    VISUALISATION_FOLDER,
                 )
 
             else:
-                vis = Visualization(10, 5, sim.n_steps, vis_set_animation_name())
+                vis = Visualization(
+                    10,
+                    5,
+                    sim.n_steps,
+                    vis_set_animation_name(),
+                    OUTPUT_FOLDER,
+                    VISUALISATION_FOLDER,
+                )
 
             vis.animate()
 

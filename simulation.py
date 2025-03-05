@@ -8,13 +8,14 @@ class Simulation:
     temp = [[None]]
 
     def __init__(
-        self, size: int, probability: float, rules: list[list[int]], n_steps: int
+        self, size: int, probability: float, rules: list[list[int]], n_steps: int,output_folder:str
     ) -> None:
         self.steps = 0
         self.size = size
         self.probability = probability
         self.rules = rules
         self.n_steps = n_steps
+        self.output_folder = output_folder
 
         self.print_sim_settings()
         self.generate()
@@ -65,7 +66,7 @@ class Simulation:
 
     def write_current(self, filename: str) -> None:
         """This method writes current state of the system into a text file."""
-        np.savetxt("output_files/" + filename, np.array(self.sim_data), fmt="%d")
+        np.savetxt(self.output_folder+"/" + filename, np.array(self.sim_data), fmt="%d")
 
     def simulate(self) -> None:
         """This method runs the simulation based on parameters specified in the instance."""
