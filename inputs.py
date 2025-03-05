@@ -1,6 +1,16 @@
 
 class Inputs:
 
+    def input_file(max:int) ->int:
+        '''This method is used to manually choose an input file if there's more than one in the input folder.'''
+        print("Input the number of chosen input file:")
+        while True:
+            tmp = input()
+            if int(tmp) < 1 or int(tmp) > max:
+                print("Input not in specified range.")
+                continue
+            return int(tmp)-1
+
     def sim_size() -> int:
         """This method is used to manually enter the size of the simulated system."""
         print("Set size of the simulation grid (3 to 1000, default: 100):")
