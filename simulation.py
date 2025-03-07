@@ -1,4 +1,5 @@
 import numpy as np
+from storage_manager import StorageManager
 
 
 class Simulation:
@@ -13,14 +14,14 @@ class Simulation:
         probability: float,
         rules: list[list[int]],
         n_steps: int,
-        output_folder: str,
+        storage_manager: StorageManager,
     ) -> None:
         self.steps = 0
         self.size = size
         self.probability = probability
         self.rules = rules
         self.n_steps = n_steps
-        self.output_folder = output_folder
+        self.storage_manager = storage_manager
 
         self.print_sim_settings()
         self.generate()
@@ -69,17 +70,11 @@ class Simulation:
                 self.temp[i][j] = self.is_alive(i, j)
         self.sim_data = np.copy(self.temp)
 
-    def write_current(self, filename: str) -> None:
-        """This method writes current state of the system into a text file."""
-        np.savetxt(
-            self.output_folder + "/" + filename, np.array(self.sim_data), fmt="%d"
-        )
-
     def simulate(self) -> None:
         """This method runs the simulation based on parameters specified in the instance."""
         print("simulating...\n")
-        self.write_current("state0.txt")
+        self.storage_manager.write(self.sim_data)
         for iter in range(self.n_steps):
             self.step()
             self.steps += 1
-            self.write_current("state" + str(self.steps) + ".txt")
+            self.storage_manager.write(self.sim_data)
