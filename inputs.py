@@ -1,15 +1,13 @@
-
 class Inputs:
-
-    def input_file(max:int) ->int:
-        '''This method is used to manually choose an input file if there's more than one in the input folder.'''
+    def input_file(max: int) -> int:
+        """This method is used to manually choose an input file if there's more than one in the input folder."""
         print("Input the number of chosen input file:")
         while True:
             tmp = input()
             if int(tmp) < 1 or int(tmp) > max:
                 print("Input not in specified range.")
                 continue
-            return int(tmp)-1
+            return int(tmp) - 1
 
     def sim_size() -> int:
         """This method is used to manually enter the size of the simulated system."""
@@ -22,7 +20,6 @@ class Inputs:
                 print("Input not in specified range.")
                 continue
             return int(tmp)
-
 
     def sim_probability() -> float:
         """This method is used to manually enter the initial probability of cells being alive in the simulated system."""
@@ -37,7 +34,6 @@ class Inputs:
                 print("Probability has to be between 0 and 1")
                 continue
             return float(tmp)
-
 
     def sim_rules() -> list[list[int]]:
         """This method is used to manually enter the cellular automaton rules applying to the simulated system."""
@@ -76,7 +72,6 @@ class Inputs:
             rules[1].append(int(tmp))
         return rules
 
-
     def sim_n_steps() -> int:
         """This method is used to manually enter the length of the simulation to be performed."""
         tmp = input("input number of steps in the simulation (default: 100):\n")
@@ -84,7 +79,6 @@ class Inputs:
             return 100
         else:
             return int(tmp)
-
 
     def vis_figsize() -> float:
         """This method is used to manually enter the size of the figure used for generating animation frames."""
@@ -98,10 +92,11 @@ class Inputs:
                 continue
             return float(tmp)
 
-
     def vis_fps() -> float:
         """This method is used to manually enter the number of frames per second in the animation to be generated."""
-        print("Set number of frames per second in the animation (0.2 to 300, default: 5):")
+        print(
+            "Set number of frames per second in the animation (0.2 to 300, default: 5):"
+        )
         while True:
             tmp = input()
             if tmp == "":
@@ -110,7 +105,6 @@ class Inputs:
                 print("Input not in specified range.")
                 continue
             return float(tmp)
-
 
     def vis_n_frames(n_steps) -> int:
         """This method is used to manually enter the number of frames in the animation to be generated."""
@@ -129,7 +123,6 @@ class Inputs:
                 print("Input not in specified range.")
                 continue
             return int(tmp)
-
 
     def vis_animation_name() -> str:
         """This method is used to set the name of a file in which the generated animation will be saved"""
