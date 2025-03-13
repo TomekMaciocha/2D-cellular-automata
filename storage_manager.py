@@ -20,7 +20,9 @@ class StorageManager:
 
     def clear(self) -> None:
         """This method removes all temporary files' handles from the 'tempfiles' list and deletes all the corresponding temporary files."""
-        for tf_num in range(len(self.tempfiles)):
-            os.close(self.tempfiles[-1][0])
-            os.remove(self.tempfiles[-1][1])
-            self.tempfiles.pop()
+        for file in self.tempfiles:
+            os.close(file[0])
+            os.remove(file[1])
+        
+        self.tempfiles = []
+

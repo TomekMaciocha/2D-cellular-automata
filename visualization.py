@@ -10,18 +10,17 @@ class Visualization:
     def __init__(
         self,
         figsize: float,
-        fps: float,
-        n_frames: int,
+        frames_per_second: float,
+        number_of_frames: int,
         animation_name: str,
-        storage_manager: StorageManager,
         visualisation_folder: str,
     ) -> None:
         self.figsize = figsize
-        self.fps = fps
-        self.n_frames = n_frames
+        self.frames_per_second = frames_per_second
+        self.number_of_frames = number_of_frames
         self.animation_name = animation_name
         self.fig, self.ax = plt.subplots(figsize=(self.figsize, self.figsize))
-        self.storage_manager = storage_manager
+        self.storage_manager = StorageManager()
         self.visualization_folder = visualisation_folder
         plt.tick_params(
             left=False, right=False, labelleft=False, labelbottom=False, bottom=False
@@ -39,8 +38,8 @@ class Visualization:
         ani = FuncAnimation(
             self.fig,
             self.draw,
-            frames=self.n_frames,
-            interval=1000 / self.fps,
+            frames=self.number_of_frames,
+            interval=1000 / self.frames_per_second,
             repeat=False,
         )
         rc("animation", html="html5")

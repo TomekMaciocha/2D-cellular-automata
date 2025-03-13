@@ -7,16 +7,16 @@ class SimulationFromFile(Simulation):
     def __init__(
         self,
         rules: list[list[int]],
-        n_steps: int,
+        number_of_steps: int,
         input_path: str,
-        storage_manager: StorageManager,
     ) -> None:
         self.steps = 0
         self.sim_data = np.loadtxt(input_path)
         self.rules = rules
-        self.n_steps = n_steps
-        self.storage_manager = storage_manager
+        self.number_of_steps = number_of_steps
+        self.storage_manager =  StorageManager()
         self.size = len(self.sim_data)
 
+
         self.print_sim_settings()
-        self.temp = np.zeros((self.size, self.size), dtype="int")
+        self.auxilliary_array = np.zeros((self.size, self.size), dtype="int")
