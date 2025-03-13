@@ -23,6 +23,5 @@ class StorageManager:
         for file in self.tempfiles:
             os.close(file[0])
             os.remove(file[1])
-        
-        self.tempfiles = []
 
+        self.tempfiles = []

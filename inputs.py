@@ -72,7 +72,9 @@ class Inputs:
 
     def number_of_steps() -> int:
         """This method is used to manually enter the length of the simulation to be performed."""
-        number_of_steps = input("input number of steps in the simulation (default: 100):\n")
+        number_of_steps = input(
+            "input number of steps in the simulation (default: 100):\n"
+        )
         if number_of_steps == "":
             return 100
         else:
@@ -124,7 +126,9 @@ class Inputs:
 
     def animation_name() -> str:
         """This method is used to set the name of a file in which the generated animation will be saved"""
-        print("Set the filename of the animation without extension (default: 'animation'):")
+        print(
+            "Set the filename of the animation without extension (default: 'animation'):"
+        )
         name = input()
         if name == "":
             name = "animation"

@@ -14,7 +14,6 @@ class Simulation:
         probability: float,
         rules: list[list[int]],
         number_of_steps: int,
-
     ) -> None:
         self.steps = 0
         self.size = size
@@ -43,7 +42,9 @@ class Simulation:
             + str(self.probability)
             + "\n"
         )
-        print("\n number of steps in the simulation:" + str(self.number_of_steps) + "\n")
+        print(
+            "\n number of steps in the simulation:" + str(self.number_of_steps) + "\n"
+        )
 
     def is_alive(self, rows: int, cols: int) -> int:
         """This method determines next state of given cell based on number of alive neighbors and automaton rules."""

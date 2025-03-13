@@ -14,9 +14,8 @@ class SimulationFromFile(Simulation):
         self.sim_data = np.loadtxt(input_path)
         self.rules = rules
         self.number_of_steps = number_of_steps
-        self.storage_manager =  StorageManager()
+        self.storage_manager = StorageManager()
         self.size = len(self.sim_data)
-
 
         self.print_sim_settings()
         self.auxilliary_array = np.zeros((self.size, self.size), dtype="int")

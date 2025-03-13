@@ -19,6 +19,8 @@ def main() -> None:
     if not os.path.exists(INPUT_FOLDER):
         os.makedirs(INPUT_FOLDER)
 
+    storage = StorageManager()
+
     while True:
         simulation_settings = input(
             "Enter:\n 1 for normal settings,\n 2 for advanced settings,\n 3 for input from text file,\n anything else for default settings:"
@@ -37,20 +39,16 @@ def main() -> None:
                 print("There are no input files. \n")
                 break
 
-            simulator = SimulationFromFile(
-                Inputs.rules(), Inputs.n_steps(), input_path
-            )
+            simulator = SimulationFromFile(Inputs.rules(), Inputs.n_steps(), input_path)
         elif simulation_settings == "2":
             simulator = Simulation(
                 Inputs.grid_size(),
                 Inputs.probability(),
                 Inputs.rules(),
-                Inputs.number_of_steps()
+                Inputs.number_of_steps(),
             )
         elif simulation_settings == "1":
-            simulator = Simulation(
-                100, 0.5, Inputs.rules(), Inputs.number_of_steps()
-            )
+            simulator = Simulation(100, 0.5, Inputs.rules(), Inputs.number_of_steps())
         else:
             simulator = Simulation(100, 0.5, [[3], [3, 2]], 100)
 
@@ -87,7 +85,6 @@ def main() -> None:
             if not another_animation == "y" and not another_animation == "Y":
                 break
 
-        storage = StorageManager()
         storage.clear()
 
         another_simulation = input(
